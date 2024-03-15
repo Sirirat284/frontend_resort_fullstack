@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white; /* พื้นหลังสีขาว */
+}
+.loginContainer {
+  width: 400px; /* กำหนดขนาดของ container ของฟอร์ม */
+  /* padding: 10px; */
+  border: 1px solid #ffffff; /* ขอบเส้นเล็กๆ สีเทา */
+  border-radius: 5px; /* เพิ่มโค้งมนเล็กน้อยที่ขอบ */
+  background-color: #ffffff; /* สีพื้นหลังของฟอร์ม */
+}
+
+.logo {
+  text-align: center;
+  margin-top: -300px; /* ปรับค่านี้ตามที่คุณต้องการ */
+  /* หรือถ้าคุณต้องการลดระยะห่างจากโลโก้ไปยังองค์ประกอบอื่นๆ */
+  margin-bottom: 5px; /* ค่าเดิมอาจจะมากกว่านี้ ลดลงเพื่อให้โลโก้ขยับขึ้น */
+}
+
+.logo img {
+  width: 300px; /* กำหนดขนาดของโลโก้ */
+  height: auto;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.formGroup input[type="email"], .formGroup input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #007bff; /* สีปุ่ม login */
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  background-color: #0056b3;
+}
+

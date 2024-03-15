@@ -1,0 +1,29 @@
+/* Footer.module.css */
+.footer {
+    background-color: #004aad; /* สีพื้นหลังของ footer */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 100px; /* ปรับขนาดโลโก้ตามต้องการ */
+  }
+  
+  .links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+  }
+  
+  .colortext {
+    color: #01477C;
+  }
+  /* เพิ่มสไตล์เพิ่มเติมตามต้องการ */
+  

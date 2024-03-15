@@ -1,0 +1,21 @@
+.headerBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff; /* ปรับตามสไตล์ของคุณ */
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
+
+}
+  .logo img {
+    width: 100px; /* ปรับขนาดตามต้องการ */
+  }
+  
+  .navLinks a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #000; /* ปรับสีตามสไตล์ของคุณ */
+  }
+
+  
