@@ -1,0 +1,57 @@
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Adjust z-index as needed */
+  }
+  
+  .modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 90%;
+  }
+  
+  .modalHeader {
+    margin-bottom: 20px;
+  }
+  
+  .modalTitle {
+    margin: 0;
+    font-size: 1.1em;
+  }
+  
+  .modalBody {
+    max-height: 300px;
+    overflow-y: auto;
+    font-weight: normal;
+  }
+  
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .modalAcceptButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modalAcceptButton:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Additional styles for scrollbar, etc., can be added here */
+  

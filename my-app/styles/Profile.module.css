@@ -1,0 +1,39 @@
+/* Profile.module.css */
+.profileContainer {
+    background-color: #fff; /* ตั้งค่าพื้นหลังเป็นสีขาว */
+    padding: 20px; /* ให้ระยะห่างรอบข้าง */
+    border-radius: 8px; /* ให้มุมเป็นรูปทรงกลม */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเล็กน้อย */
+    margin-top: 20px; /* ให้ระยะห่างจาก Header */
+  }
+  
+  .profileHeader h2 {
+    color: #30A0E0; /* ปรับสีเป็นสีน้ำเงิน */
+    font-size: 2em; /* ขยายขนาดตัวหนังสือ */
+  }
+  
+  .profileDetails p {
+    font-size: 1.2em; /* ขยายขนาดตัวหนังสือของเนื้อหา */
+    margin: 10px 0; /* ให้ระยะห่างระหว่างบรรทัด */
+  }
+  
+.pageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* หรือใช้ 'center' ถ้าต้องการจัดกลางแนวตั้ง */
+    padding-top: 20px; /* หรือค่าที่ต้องการเพื่อให้เนื้อหาลงมานิดหน่อย */
+    min-height: 100vh;
+  }
+  
+  .sidebarContainer {
+    width: 200px; /* หรือตามขนาดที่ต้องการ */
+    margin-right: 20px; /* ระยะห่างจากเนื้อหา */
+    /* เพิ่มสไตล์อื่นๆ สำหรับ sidebar ที่นี่ */
+  }
+  
+  .contentContainer {
+    flex-grow: 1; /* ให้เนื้อหาขยายเต็มพื้นที่ที่เหลือ */
+    max-width: 800px; /* หรือตามขนาดที่ต้องการ */
+    /* เพิ่มสไตล์อื่นๆ สำหรับเนื้อหาที่นี่ */
+  }
+  

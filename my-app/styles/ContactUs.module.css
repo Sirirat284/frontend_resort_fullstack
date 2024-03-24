@@ -1,0 +1,65 @@
+.site_container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between; /* ช่วยให้เนื้อหาและ footer กระจายตัวจากกัน */
+}
+
+.container {
+  flex-grow: 1; /* ทำให้เนื้อหาสามารถขยายเต็มพื้นที่ที่เหลือ */
+}
+
+.footer {
+  margin-top: auto; /* ดัน footer ไปอยู่ด้านล่างสุด */
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* จัดกลางเนื้อหาในแนวตั้ง */
+    text-align: center; /* จัดกลางข้อความ */
+}
+
+.socialLinks a {
+    margin: 0 10px;
+    text-decoration: none; /* ลบเส้นใต้ลิงก์ */
+    color: #006BBB; /* สีของลิงก์ */
+}
+
+.myTitle {
+    font-size: 1.5em; /* ขนาดใหญ่ขึ้น */
+    color: #30A0E0; /* สีฟ้า */
+  }
+  .socialMedia {
+    display: flex;
+    justify-content: center; /* จัดกลางเนื้อหาในแนวนอน */
+    align-items: center; /* ให้ไอคอนและข้อความอยู่ในบรรทัดเดียวกัน */
+    gap: 5px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+    width: 100%; /* ให้ครอบคลุมความกว้างของ container */
+  }
+  .mapLayout {
+    display: flex;
+    justify-content: space-between; /* หรือใช้ 'space-around' หากต้องการช่องว่างรอบด้าน */
+    align-items: flex-start; /* ปรับตามต้องการ */
+    gap: 20px; /* ระยะห่างระหว่างแต่ละส่วน */
+  }
+  
+  .mapContainer, .imageMapContainer {
+    flex: 1; /* ให้ Google Maps และรูปภาพมีพื้นที่เท่ากัน */
+    max-width: 50%; /* หรือปรับตามความต้องการ */
+  }
+  
+  .iframeContainer {
+    width: 600px; /* ให้ iframe เต็มความกว้างของ container */
+    height: 400px; /* หรือปรับตามความต้องการ */
+  }
+  
+  .imageMap {
+    width: 600px; /* ให้รูปภาพเต็มความกว้างของ container */
+    height: auto; /* รักษาอัตราส่วน */
+  }
+
+  .footer {
+    margin-top: auto;
+  }

@@ -1,0 +1,26 @@
+/* styles/Header.module.css */
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    height: 50px; /* ปรับขนาดตามความต้องการ */
+  }
+  
+  .adminTitle {
+    font-size: 24px; /* ปรับขนาดตามความต้องการ */
+    color: #333; /* ปรับสีตามความต้องการ */
+  }
+  
+  .logoutText {
+    padding: 10px; /* ปรับขนาดและระยะห่างตามความต้องการ */
+    color: red; /* หรือสีอื่นๆ ที่คุณต้องการ */
+    cursor: pointer;
+    text-decoration: none; /* ลบเส้นใต้ของลิงค์ */
+  }
+  

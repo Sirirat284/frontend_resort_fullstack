@@ -1,0 +1,33 @@
+/* MenuButton.module.css */
+.menuContainer {
+    display: flex;
+    justify-content: center; /* Centers the buttons horizontally */
+    align-items: center; /* Centers the buttons vertically */
+    gap: 10px; /* Reduces space between buttons */
+    padding: 10px;
+}
+  
+.menuItem {
+    background-color: #FFA500; /* Orange background */
+    color: white; /* White text */
+    border: none;
+    padding: 10px 20px; /* Reduced padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; /* Smaller font size */
+    margin: 2px 1px; /* Reduced margin */
+    transition-duration: 0.4s; /* Smooth transition for mouse hover */
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners */
+}
+  
+.menuItem:hover {
+    background-color: #ff9900; /* White background on hover */
+    color: black; /* Black text on hover */
+}
+  
+.active {
+    background-color: #FF4500; /* Darker orange when active */
+    color: white;
+}

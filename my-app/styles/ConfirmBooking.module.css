@@ -1,0 +1,57 @@
+.confirmationContainer {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.confirmationContainer h2 {
+    color: #307AD1;
+    margin-bottom: 20px;
+}
+
+.confirmationDetail {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.confirmButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #307AD1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.confirmButton:hover {
+    background-color: #265a8f;
+}
+
+/* สไตล์เพิ่มเติมสำหรับ checkbox และลิงค์ */
+.checkboxContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.termsLink {
+    color: #FFBC4F;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* ตั้งค่าสไตล์สำหรับ logo และส่วน header */
+.logoContainer {
+    margin-bottom: 20px;
+}
+
+.logoContainer img {
+    width: 150px; /* ปรับตามขนาดที่ต้องการ */
+    margin: 0 auto;
+}

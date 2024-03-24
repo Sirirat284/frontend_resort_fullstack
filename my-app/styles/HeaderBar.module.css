@@ -1,21 +1,84 @@
+/* HeaderBar.module.css */
 .headerBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff; /* ปรับตามสไตล์ของคุณ */
-  padding: 10px 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงา */
-
+  background-color: #fff;
+  padding: 0 60px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-  .logo img {
-    width: 100px; /* ปรับขนาดตามต้องการ */
-  }
-  
-  .navLinks a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: #000; /* ปรับสีตามสไตล์ของคุณ */
-  }
 
-  
+.logo img {
+  height: 70px; /* ปรับตามขนาดโลโก้ของคุณ */
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navLinks a {
+  margin: 0 15px; /* ปรับระยะห่าง */
+  font-size: 20px; /* ปรับขนาดข้อความ */
+  text-decoration: none;
+  color: #30A0E0; /* ปรับสีข้อความ */
+  font-weight: medium; /* ทำให้ข้อความหนา */
+}
+
+.navLinks a:hover {
+  text-decoration: underline; /* เพิ่ม underline เมื่อ hover */
+}
+
+.loginButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #30A0E0; /* สีปุ่มเข้าสู่ระบบ */
+}
+
+.loginButton:hover {
+  text-decoration: underline;
+}
+
+.profilePic {
+  width: 50px; /* ขนาดของรูปโปรไฟล์ */
+  height: 50px; /* ขนาดของรูปโปรไฟล์ */
+  border-radius: 50%; /* ทำให้รูปเป็นวงกลม */
+  object-fit: cover; /* ให้รูปภาพพอดีกับขนาด */
+}
+
+/* เป็น */
+.navLink.active {
+  color: orange; /* สีสำหรับลิงก์ที่ active */
+}
+
+.dropdownContent {
+  display: block;
+  position: absolute;
+  background-color: #30A0E0; /* สีพื้นหลังของ dropdown, ตัวอย่างนี้ใช้สีน้ำเงิน */
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 0; /* ปรับ padding เป็น 0 */
+  z-index: 1;
+  border-radius: 10px; /* ขอบมน */
+  margin-top: 5px; /* ระยะห่างจาก NavLink */
+}
+
+.dropdownContent a {
+  color: white; /* สีข้อความ */
+  padding: 15px 20px; /* ขนาด padding เพิ่มเติมเพื่อความสะดวกในการคลิก */
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ffffff30; /* ขอบด้านล่างสีขาวอ่อนๆ */
+  text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+}
+
+.dropdownContent a:last-child {
+  border-bottom: none; /* ไม่มีขอบด้านล่างสำหรับลิงก์สุดท้าย */
+}
+
+.dropdownContent a:hover {
+  background-color: #0056b3; /* สีพื้นหลังเมื่อ hover */
+}

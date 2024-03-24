@@ -1,0 +1,45 @@
+.locationContainer {
+    display: flex;
+    flex-direction: column; /* จัดเรียงแนวตั้ง */
+    align-items: center; /* จัดกลางแนวนอน */
+    gap: 20px; /* ระยะห่างระหว่างไอเท็ม */
+    padding: 20px;
+  }
+  
+  .locationItem {
+    display: flex;
+    flex-direction: row; /* จัดเรียงแนวนอน */
+    align-items: center; /* จัดกลางแนวตั้ง */
+    width: 100%; /* กว้างเต็มพื้นที่คอนเทนเนอร์ */
+    max-width: 900px; /* กำหนดขนาดสูงสุด */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .imageWrapper {
+    flex-shrink: 0; /* ป้องกันภาพถูกย่อขนาด */
+    width: auto; /* กำหนดขนาดภาพ */
+    height: auto; /* กำหนดความสูงของภาพ */
+  }
+  
+  .locationImage {
+    border-radius: 8px;
+    width: auto; /* ให้ภาพเต็มกล่อง */
+    height: auto; /* รักษาอัตราส่วนของภาพ */
+  }
+  
+  .contentWrapper {
+    margin-left: 20px; /* ระยะห่างจากรูปภาพไปยังข้อความ */
+    flex-grow: 1; /* ให้ contentWrapper ขยายเต็มพื้นที่ที่เหลือ */
+  }
+  
+  .locationTitle {
+    margin: 0; /* ลบ margin ของ h2 และ p */
+    color: #FFBC4F;
+    font-size: 1.5em;
+    font-weight:bold;
+  }
+  .locationDetail{
+    margin: 0; /* ลบ margin ของ h2 และ p */
+  }
+  

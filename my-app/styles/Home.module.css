@@ -1,0 +1,153 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* จัดให้ข้อความอยู่กลาง */
+  }
+  .titlesContainer {
+    display: flex; 
+    align-items: center; /* จัดกลางข้อความแนวตั้ง */
+  }
+  .title1 {
+    text-align: center;
+    font-size: 3.5em;
+    color: #8B8A8D;
+  }
+  .title2 {
+    text-align: center;
+    font-size: 3.5em;
+    color: #FFBC4F;
+  }
+  
+  .text {
+    color: #757575;
+    font-size: 1.5em;
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 227, 179, 0.3);
+  }
+  
+  .logo {
+    width: 25%; /* ปรับตามความต้องการ */
+    margin-bottom: 20px; /* ระยะห่างจากโลโก้ไปยัง categories */
+  }
+  
+  .categoryContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; /* กำหนดความกว้างตามความต้องการ */
+  }
+  
+  .category {
+    text-align: center;
+    margin: 0 20px; /* ระยะห่างระหว่าง category */
+  }
+  
+  .category img {
+    width: 500px;
+    height: auto;
+  }
+  
+  .category h2 {
+    margin-top: 10px;
+  }
+
+  .facilities {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* สร้าง 4 คอลัมน์ที่มีขนาดเท่ากัน */
+    justify-content: center; /* จัดกลางเนื้อหาในแนวนอน */
+    gap: 20px; /* กำหนดระยะห่างระหว่างไอเทม */
+  }
+  
+  .facility {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* จัดกลาง items ในแต่ละ facility */
+    text-align: center; /* จัดกลางข้อความ */
+  }
+  
+  .facility img {
+    width: 100%; /* ทำให้รูปภาพเต็มความกว้างของคอลัมน์ */
+    max-width: 190px; /* กำหนดขนาดสูงสุด */
+    margin-bottom: 10px; /* ระยะห่างจากรูปถึงข้อความ */
+  }
+  
+  .facility p {
+    margin: 0; /* ลดระยะห่างรอบข้อความ */
+    font-size: 1em; /* ปรับขนาดข้อความ */
+  }
+  
+  .facilitiesContainer h1 {
+    font-size: 2em; /* หรือขนาดที่ต้องการ */
+    text-align: center; /* จัดให้ข้อความอยู่กลาง */
+    margin-top: 20px; /* หรือระยะห่างที่ต้องการจากด้านบน */
+    margin-bottom: 20px; /* ระยะห่างก่อนถึงส่วนของไอคอน */
+  }
+
+  .contactContainer {
+    display: flex;
+    justify-content: center; /* หรือแก้ไขเป็น space-around เพื่อกระจายส่วนต่างๆ */
+    flex-wrap: wrap; /* ช่วยให้ส่วนต่างๆ ปรับตัวเมื่อพื้นที่ไม่พอ */
+    align-items: center; /* ให้ส่วนต่างๆ อยู่กึ่งกลางแนวตั้ง */
+    gap: 20px; /* ใส่ช่องว่างระหว่างกรอบข้อความและรูปภาพ */
+    background-color: rgba(255, 227, 179, 0.3);
+  }
+ 
+  .contactInfo {
+    display: flex; /* ใช้ flexbox */
+    flex-direction: column; /* จัดองค์ประกอบในแนวตั้ง */
+    justify-content: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวตั้ง */
+    align-items: center; /* จัดให้เนื้อหาอยู่ตรงกลางแนวนอน */
+    background-color: #fff;
+    width: 40%; /* ปรับตามความต้องการ */
+    height: 400px; /* หรือปรับตามความต้องการ */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .imageContainer {
+    flex-basis: 30%; /* ลดขนาดของรูปภาพลง */
+    margin-left: -20px; /* ดันรูปภาพให้ชิดกับกรอบข้อความ */
+
+  }
+  
+  .imageContainer img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%; /* ให้รูปภาพเต็ม container */
+    border-radius: 8px; /* ใส่ถ้าต้องการให้รูปภาพมีมุมโค้ง */
+  }
+  
+  .phoneNumber {
+    font-size: 2.5em;
+    color: #007BFF; /* สีของเบอร์โทร */
+  }
+  .titlecontage {
+     font-size: 1.5em;
+  }
+  
+  .actionButton {
+    margin-top: 20px; /* ระยะห่างจากข้อความด้านบน */
+  }
+  
+  .actionButton button {
+    background-color: #FFD700; /* พื้นหลังปุ่มสีเหลือง */
+    color: #ffffff; /* ข้อความสีขาว */
+    border: none; /* ไม่มีเส้นขอบ */
+    padding: 10px 20px; /* ระยะห่างภายในปุ่ม */
+    border-radius: 5px; /* ขอบมน */
+    cursor: pointer; /* ให้เมาส์เป็นมือเมื่อชี้ */
+    font-size: 1rem; /* ขนาดของข้อความ */
+  }
+  
+  
+  

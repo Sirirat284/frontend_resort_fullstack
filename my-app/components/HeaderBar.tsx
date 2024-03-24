@@ -1,25 +1,76 @@
-import React from 'react';
+// นำเข้า useRouter และ useState, useEffect และแบบข้อมูล ReactNode
+import { useRouter } from 'next/router';
 import Link from 'next/link';
-import styles from '../styles/HeaderBar.module.css'; // สมมติว่าคุณมีไฟล์ CSS module สำหรับ styling
+import React, { useState, useEffect, ReactNode } from 'react';
+import styles from '../styles/HeaderBar.module.css';
 
-const HeaderBar = () => {
+// อาจจำเป็นต้องปรับปรุง types ให้ตรงกับความต้องการของโปรเจกต์คุณ
+interface NavLinkProps {
+  href: string;
+  children: ReactNode;
+}
+
+// Component สำหรับ NavLink เพื่อตรวจสอบ active link
+const NavLink: React.FC<NavLinkProps> = ({ href, children }) => {
+  const router = useRouter();
+  const isActive = router.pathname === href;
+
+  // ปรับแต่ง class หรือ style เมื่อ link active ได้ที่นี่
+  const linkStyle = isActive ? `${styles.navLink} ${styles.active}` : styles.navLink;
+
+  return (
+    <Link href={href} className={linkStyle}>
+      {children}
+    </Link>
+  );
+};
+
+const HeaderBar: React.FC = () => {
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profilePic, setProfilePic] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+    if (loggedIn) {
+      setProfilePic("/icons8-glyph-96.png");
+    }
+  }, []);
+
   return (
     <header className={styles.headerBar}>
       <div className={styles.logo}>
         <img src="/BAAn RIM NAM(1).png" alt="Logo" />
       </div>
       <nav className={styles.navLinks}>
-        <Link href="/">หน้าหลัก</Link>
-        <Link href="/about">ประเภทบ้านพัก</Link>
-        <Link href="/services">ประชุม&จัดเลี้ยง </Link> 
-        <Link href="/contact">โปรโมชั่น</Link>
-        <Link href="/contact">สถานที่รอบๆ</Link>
-        <Link href="/contact">ติดต่อเรา</Link>
-        {/* เพิ่มเติมลิงก์ของคุณที่นี่ */}
+        <NavLink href="/">หน้าหลัก</NavLink>
+        <div onClick={toggleDropdown} className={styles.dropdown}>
+          <NavLink href="">ประเภทบ้านพัก▼</NavLink>
+          {isDropdownOpen && (
+            <div className={styles.dropdownContent}>
+              <Link href="/typeroom/type1">สำหรับพัก 1-2 ท่าน</Link>
+              <Link href="/typeroom/type2">สำหรับพัก 3-4 ท่าน</Link>
+              <Link href="/typeroom/type3">สำหรับพัก 1 ครอบครัว</Link>
+            </div>
+          )}
+        </div>
+        <NavLink href="/promotion">โปรโมชั่น</NavLink> 
+        <NavLink href="/location">สถานที่รอบๆ</NavLink>
+        <NavLink href="/contactus">ติดต่อเรา</NavLink>
       </nav>
-      <div>เข้าสู่ระบบ</div>
+      {isLoggedIn ? (
+        <img src={profilePic} alt="Profile" className={styles.profilePic} />
+      ) : (
+        <button onClick={() => router.push('/login')} className={styles.loginButton}>
+          เข้าสู่ระบบ
+        </button>
+      )}
     </header>
   );
-}
+};
 
 export default HeaderBar;

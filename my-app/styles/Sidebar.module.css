@@ -1,0 +1,35 @@
+/* อย่าลืมเปลี่ยนชื่อ class ให้ตรงกับชื่อที่ใช้ในโค้ดของคุณ */
+
+.sidebar {
+    background-color: #fff; /* สีขาว */
+    border-radius: 8px; /* ขอบมน */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+    padding: 20px; /* ระยะห่างภายใน */
+    width: 200px; /* ขนาดของ sidebar */
+  }
+  
+  .sidebarList {
+    list-style-type: none; /* ลบ bullet points */
+    padding: 0; /* ลบระยะห่าง */
+  }
+  
+  .sidebarItem {
+    margin-bottom: 10px; /* ระยะห่างระหว่างแต่ละ item */
+  }
+  
+  .sidebarItem a {
+    color: #30A0E0; /* สีฟ้า */
+    text-decoration: none; /* ลบเส้นใต้ */
+  }
+  
+  .sidebarItem a:hover,
+  .sidebarItem a:active,
+  .sidebarItem a:focus {
+    color: #FFA500; /* สีส้ม เมื่ออยู่บนหน้านั้น */
+  }
+
+  .activeLink {
+    color: orange; /* หรือสีส้มที่คุณต้องการ */
+  }
+  
+  

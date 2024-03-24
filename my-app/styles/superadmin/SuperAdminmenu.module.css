@@ -1,0 +1,36 @@
+/* SuperAdmin.module.css */
+.menuContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start; /* ปรับจาก center เป็น flex-start */
+    margin-top: 20px;
+    padding-left: 20px; /* เพิ่ม padding ด้านซ้ายหากต้องการให้มีช่องว่างจากขอบซ้ายของหน้า */
+  }
+  
+  .menuItem {
+    background-color: #30A0E0;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  
+  .menuItem:hover {
+    background-color: #0056b3;
+  }
+  
+  .active {
+    background-color: #ffc107;
+    color: black;
+  }
+  
+  /* หากต้องการให้ปุ่มมี shadow */
+  .menuItem {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+  

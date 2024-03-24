@@ -1,0 +1,66 @@
+/* BookingForm.module.css */
+.bookingFormContainer {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  .logoContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .logoContainer img {
+    max-width: 100px; /* ปรับขนาดโลโก้ตามต้องการ */
+  }
+  
+  .bookingFormContainer h1 {
+    text-align: center;
+    color: #30A0E0; /* สีน้ำเงิน */
+    margin-bottom: 20px;
+    font-size: 24px; /* ขนาดใหญ่ขึ้น */
+  }
+  
+  .bookingFormContainer form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .bookingFormContainer label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .bookingFormContainer input,
+  .bookingFormContainer select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .bookingFormContainer button {
+    padding: 8px 15px; /* ปรับขนาดให้เล็กลง */
+    background-color: #30A0E0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bolder;
+    align-self: center; /* จัดตำแหน่งให้อยู่ตรงกลาง */
+  }
+  
+  .bookingFormContainer button:hover {
+    background-color: #0056b3;
+  }
+  
+  .required {
+    color: red;
+  }

@@ -1,0 +1,204 @@
+.dateFilterContainer label {
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่าง label กับ input */
+  }
+  
+  .dateFilterContainer input[type="date"] {
+    border: 1px solid #ccc; /* เพิ่มขอบสีเทา */
+    padding: 5px 10px; /* เพิ่ม padding */
+    margin-right: 10px; /* เพิ่มระยะห่างระหว่าง input */
+  }
+  
+  .dateFilterContainer button {
+    background-color: #4fc3f7; /* ปุ่มสีฟ้าอ่อน */
+    color: white; /* ข้อความสีขาว */
+    border: none; /* ลบขอบปุ่ม */
+    padding: 10px 20px; /* ขนาดของ padding */
+    border-radius: 20px; /* โค้งขอบปุ่ม */
+    cursor: pointer; /* เมาส์เปลี่ยนเป็นมือเมื่อโฮเวอร์ */
+    transition: background-color 0.3s; /* การเปลี่ยนสีเมื่อโฮเวอร์ */
+  }
+  
+  .dateFilterContainer button:hover {
+    background-color: #30A0E0; /* สีฟ้าเข้มขึ้นเมื่อโฮเวอร์ */
+  }
+  
+  .statsContainer {
+    margin: 20px 50px; /* เว้นระยะขอบซ้ายและขวาของตาราง */
+  }
+  
+  .bookingTable {
+    width: calc(100% - 100px); /* ปรับขนาดตารางให้เว้นซ้ายขวา */
+    margin: 0 auto; /* จัดตารางให้อยู่ตรงกลาง */
+  }
+
+  .dateFilterContainer {
+    display: flex;
+    justify-content: flex-end; /* จัดให้ชิดขวา */
+    gap: 10px; /* เพิ่มระยะห่างระหว่าง elements */
+    margin-right: 50px; /* เพิ่มระยะห่างจากขวา */
+  }
+  
+  .bookingTable th {
+    background-color: #63b4e2; /* สีเขียวอ่อน */
+    color: white; /* ข้อความสีขาว */
+  }
+
+  .bookingTable td, .bookingTable th {
+    text-align: center; /* จัดให้ข้อความอยู่ตรงกลางของแต่ละคอลัมน์ */
+  }
+  
+  .bookingTable {
+    width: 100%; /* หรือกำหนดเป็นความกว้างเฉพาะตามที่ต้องการ */
+    border-collapse: collapse;
+  }
+  
+  .bookingTable th, .bookingTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center; /* จัดให้ข้อความอยู่ตรงกลาง */
+  }
+  
+  .totalRevenueTable {
+    width: 100%; /* ให้มีความกว้างเท่ากับตารางข้อมูลด้านบน */
+    margin-top: 10px; /* หรือปรับตามความต้องการ */
+  }
+  
+  .highlightRow {
+    background-color: #caffdb; /* หรือสีอื่นที่คุณต้องการ */
+    color: #000;
+  }
+  
+  .updateButton {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* สำหรับปุ่มที่ห้องอยู่ในสถานะปรับปรุง */
+.activeStatus {
+    border-radius: 20px;
+    background-color: rgb(219, 0, 0); /* สีพื้นหลังเป็นแดง */
+    color: white; /* สีตัวอักษรเป็นขาว */
+}
+
+/* ตั้งค่าสีปุ่มปกติ */
+.updateButton:not(.activeStatus) {
+    border-radius: 20px;
+    background-color: rgb(141, 141, 141);
+    color: white;
+}
+
+/* เพิ่มรูปแบบเมื่อโฮเวอร์ */
+.updateButton:hover {
+    background-color: #555; /* ทำให้สีเข้มขึ้นเมื่อโฮเวอร์ */
+}
+
+.statusDotActive {
+    height: 10px;
+    width: 10px;
+    background-color: #4CAF50; /* เขียว */
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .statusDotInactive {
+    height: 10px;
+    width: 10px;
+    background-color: #808080; /* เทา */
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .deleteButton {
+    background-color: #ff4d4d; /* สีแดง */
+    color: white; /* ข้อความสีขาว */
+    padding: 10px 15px; /* ขนาดของ padding */
+    border: none; /* ลบขอบปุ่ม */
+    cursor: pointer; /* เมาส์เปลี่ยนเป็นมือเมื่อโฮเวอร์ */
+    border-radius: 5px; /* โค้งขอบปุ่ม */
+    transition: opacity 0.3s; /* การเปลี่ยนสีเมื่อโฮเวอร์ */
+}
+
+.deleteButton:hover {
+    opacity: 0.8; /* ทำให้เลือนลงเมื่อโฮเวอร์ */
+}
+
+.tableCellImage {
+    text-align: center; /* จัดให้เนื้อหาใน cell อยู่ตรงกลาง */
+}
+
+.tableCellImageimg {
+    width: 180px; /* กำหนดขนาดของรูปภาพ */
+    margin: auto; /* จัดให้รูปภาพอยู่ตรงกลางของ cell */
+}
+.tableCellslip {
+    width: 250px; /* กำหนดขนาดของรูปภาพ */
+    margin: auto; /* จัดให้รูปภาพอยู่ตรงกลางของ cell */
+}
+.approveButton {
+    background-color: green;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .declineButton {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .statusDotAvailable {
+    background-color: #28a745; /* Green */
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .statusDotOccupied {
+    background-color: #6c757d; /* Gray */
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  .statusDotUnderMaintenance {
+    background-color: #ffb700; 
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+  }
+
+  .detailsButton {
+    padding: 8px 16px;
+    background-color: #4CAF50; /* สีพื้นหลังของปุ่ม */
+    color: white; /* สีข้อความของปุ่ม */
+    border: none; /* ไม่มีขอบ */
+    cursor: pointer; /* เมาส์เปลี่ยนเป็นมือเมื่อโฮเวอร์ */
+    border-radius: 4px; /* ขอบมน */
+    transition: background-color 0.3s; /* การเปลี่ยนสีเมื่อโฮเวอร์ */
+  }
+  
+  .detailsButton:hover {
+    background-color: #45a049; /* สีพื้นหลังของปุ่มเมื่อโฮเวอร์ */
+  }
+  
+  
+  
+
+
+
+  

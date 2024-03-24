@@ -1,0 +1,44 @@
+.detailsContainer {
+    width: 400px; /* กำหนดความกว้างสูงสุดของ container */
+    margin: 20px auto; /* เพื่อให้ container อยู่ตรงกลางของหน้า */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* เพิ่มเพื่อจัดการเนื้อหาในแนวตั้ง */
+    align-items: center; /* จัดกลางของเนื้อหาในแนวตั้ง */
+}
+
+.detailsHeader {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.detailItem {
+    display: flex; /* ใช้ flexbox เพื่อจัดการรายละเอียด */
+    justify-content: space-between; /* ให้ข้อความด้านซ้ายและขวามีระยะห่าง */
+    align-items: center; /* เพิ่มเพื่อจัดกลางของข้อความในแนวตั้ง */
+    width: 100%; /* ให้ความกว้างเต็ม container */
+    margin-bottom: 10px;
+}
+
+.detailItem span {
+    font-weight: bold;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ให้คอนเทนเนอร์มีความสูงขั้นต่ำเท่ากับหน้าจอ */
+}
+
+.contentContainer {
+    flex: 1; /* ให้เนื้อหาใน contentContainer ขยายเต็มพื้นที่ */
+    display: flex;
+    flex-direction: column; /* จัดเนื้อหาเป็นแนวตั้ง */
+}
+
+.footerContainer {
+    margin-top: auto; /* ดัน footer ไปอยู่ล่างสุด */
+}

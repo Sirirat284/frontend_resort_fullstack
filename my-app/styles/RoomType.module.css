@@ -1,0 +1,115 @@
+.roomTypeContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    flex-direction: row; /* แนวนอน */
+    max-width: 1200px; /* กำหนดขนาดสูงสุดของ container */
+    margin: auto; /* ทำให้ container อยู่ตรงกลางของหน้า */
+  }
+  
+  .details {
+    flex: 1; /* กำหนดให้มีขนาดเท่ากันกับ imageContainer */
+    max-width: 600px; /* กำหนดขนาดสูงสุด */
+    text-align: left; /* จัดข้อความให้ชิดซ้าย */
+  }
+  
+  .imageContainer {
+    flex: 1; /* กำหนดให้มีขนาดเท่ากันกับ details */
+    display: flex;
+    justify-content: center; /* จัดกลาง */
+    max-width: 600px; /* กำหนดขนาดสูงสุด */
+  }
+  
+  .imageContainer img {
+    max-width: 100%; /* ให้รูปภาพเต็มความกว้างของ container */
+    height: auto; /* ให้ความสูงปรับตัวอัตโนมัติตามขนาดสูงสุด */
+    border: 50px;
+  }
+  
+  .bookingButton {
+    background-color: #FFBC4F; /* สีปุ่ม */
+    color: white; /* สีข้อความ */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    display: block; /* ให้ปุ่มเป็น block เพื่อให้สามารถจัดกลางได้ง่ายขึ้น */
+    margin: 20px auto 0; /* จัดกลางและมีช่องว่างด้านบน */
+  }
+  
+  .price {
+    font-weight: meduim;
+    font-size: 2em;
+  }
+  .priceNum {
+    color: #006BBB;
+  }
+  .pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* ทำให้ container มีขนาดน้อยสุดเท่ากับความสูงของ viewport */
+  }
+  
+  .contentWrapper {
+    flex: 1; /* ทำให้ contentWrapper ยืดเต็มพื้นที่ที่เหลือ */
+    /* อื่นๆ ขึ้นอยู่กับสไตล์ของคุณ */
+  }
+  /* RoomType.module.css */
+
+/* ปรับแต่งสไตล์สำหรับ h2 */
+.details h2 {
+    color: #006BBB; /* สี */
+    font-size: 2em; /* ขนาด */
+    margin-bottom: 0.5em; /* ระยะห่างจากข้อความถัดไป */
+  }
+  
+  /* ปรับแต่งสไตล์สำหรับ h3 */
+  .details h3 {
+    color: #000000; /* สีดำ */
+    font-size: 1.5em; /* ขนาด */
+    margin-bottom: 0.5em; /* ระยะห่างจากข้อความถัดไป */
+  }
+  
+  /* ปรับแต่งสไตล์สำหรับ li */
+  .details ul li {
+    list-style-type: disc; /* ใช้จุด */
+    margin-left: 20px; /* ให้มีระยะห่างจากซ้าย เพื่อให้จุดชัดเจนขึ้น */
+  }
+  
+
+  /* Style for date inputs and availability check button */
+  .datePickerContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end; /* แก้ไขจาก end เป็น flex-end */
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+.dateInputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.dateInputLabel {
+  margin-bottom: 5px;
+}
+
+.dateInput {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 160px; /* ปรับความกว้างของช่องวันที่ */
+}
+
+.checkAvailabilityButton {
+  padding: 8px 16px;
+  background-color: #30A0E0; 
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+}

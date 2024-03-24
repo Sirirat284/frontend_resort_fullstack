@@ -15,7 +15,7 @@
 
 .logo {
   text-align: center;
-  margin-top: -300px; /* ปรับค่านี้ตามที่คุณต้องการ */
+  margin-top: -150px; /* ปรับค่านี้ตามที่คุณต้องการ */
   /* หรือถ้าคุณต้องการลดระยะห่างจากโลโก้ไปยังองค์ประกอบอื่นๆ */
   margin-bottom: 5px; /* ค่าเดิมอาจจะมากกว่านี้ ลดลงเพื่อให้โลโก้ขยับขึ้น */
 }
@@ -56,3 +56,19 @@
   background-color: #0056b3;
 }
 
+.error {
+  color: red; /* หรือสีอื่นๆ ที่ต้องการ */
+  margin-top: 10px;
+}
+
+.link {
+  color: #FFBC4F; /* สีของข้อความลิงก์ */
+  text-decoration: none; /* ไม่มีเส้นใต้ */
+  padding: 5px 10px; /* ระยะห่างภายในลิงก์ */
+  border-radius: 5px; /* ขอบมน */
+  transition: background-color 0.3s; /* เอฟเฟกต์เมื่อมีการโฮเวอร์ */
+}
+
+.link:hover {
+  color: #9b6000; /* สีของข้อความลิงก์ */
+}

@@ -1,0 +1,113 @@
+/* Signup.module.css */
+
+.signupForm {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fff; /* พื้นหลังสีขาว */
+}
+
+.formGroup, .formGroupDual > div {
+  display: flex;
+  flex-direction: column; /* ปรับให้เป็น column เพื่อให้ label อยู่ด้านบนของ input */
+  margin-bottom: 15px;
+}
+
+.formGroup label, .formGroupDual > div > label {
+  /* font-weight: bold; ทำให้ตัวหนังสือเข้มขึ้น */
+  margin-bottom: 5px; /* ให้ช่องว่างระหว่าง label และ input */
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"],
+.formGroup input[type="tel"],
+.formGroup select,
+.formGroupDual > div > input {
+  padding: 10px;
+  border: 1px solid #d3d3d3; /* สีขอบกรอบ */
+  border-radius: 4px;
+  background-color: #f9f9f9; /* สีพื้นหลังสำหรับ input */
+}
+
+.formGroupDual {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formGroupDual > div {
+  width: 48%;
+}
+
+.formAction {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.formAction button {
+  padding: 10px 20px;
+  background-color: #30A0E0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.formAction button:disabled {
+  background-color: #cccccc;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ปรับแต่งเพิ่มเติมให้ label และ input อยู่ในบรรทัดเดียวกัน */
+.formGroup, .formGroupDual > div {
+  flex-direction: row;
+  align-items: center;
+}
+
+.formGroup label, .formGroupDual > div > label {
+  flex-basis: 30%;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="email"],
+.formGroup input[type="password"],
+.formGroup input[type="tel"],
+.formGroup select,
+.formGroupDual > div > input {
+  flex-grow: 1;
+}
+.termsLink {
+  color: #FFBC4F;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: normal;
+  color: #30A0E0;
+}
+
+.logo {
+  display: flex;
+  justify-content: center; /* จัดกลางแนวนอน */
+  align-items: center; /* จัดกลางแนวตั้งหากต้องการ */
+  width: 100%; /* หรือคุณสามารถกำหนดค่าตามต้องการ */
+}
+
+.logo img {
+  max-width: 40%; /* จำกัดขนาดสูงสุดของรูปภาพ เช่น 50% ของขนาดของ div มันอยู่ใน */
+  height: auto; /* รักษาอัตราส่วนของรูปภาพ */
+}
+
+
