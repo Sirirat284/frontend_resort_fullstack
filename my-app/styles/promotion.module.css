@@ -1,0 +1,59 @@
+/* อยู่ในไฟล์ promotion.module.css */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.promotionHeader {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.promotionList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.promotionItem {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.promotionImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.promotionContent {
+    padding: 20px;
+}
+
+.promotionTitle {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.promotionDescription {
+    font-size: 16px;
+    color: #666;
+}
+
+@media screen and (max-width: 768px) {
+    .promotionItem {
+        width: calc(50% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .promotionItem {
+        width: 100%;
+    }
+}

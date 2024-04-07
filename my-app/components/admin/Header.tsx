@@ -1,13 +1,25 @@
 // components/Header.tsx
-import React from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import React,{useState} from 'react';
 import Link from 'next/link';
 import styles from '../../styles/HeaderAdmin.module.css'; // ตรวจสอบเส้นทางของไฟล์ CSS
 
 const Header = () => {
-  const handleLogout = () => {
-    // รหัสสำหรับการออกจากระบบ, เช่น ล้างข้อมูลใน localStorage หรือ cookies
-    console.log('Logging out...');
-    // Redirect ไปยังหน้า login
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleLogout = async () => {
+    try {
+      // Call API endpoint to logout
+      await fetch('../api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      setIsLoggedIn(false);
+      router.push('/rimnamadmin');
+    } catch (error) {
+      console.error('Failed to logout:', error);
+    }
   };
 
   return (

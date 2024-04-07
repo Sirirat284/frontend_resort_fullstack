@@ -30,16 +30,52 @@ const HeaderBar: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profilePic, setProfilePic] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
-  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const [isDropdownOpenUser, setIsDropdownOpenUser] = useState(false);
 
   useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(loggedIn);
-    if (loggedIn) {
-      setProfilePic("/icons8-glyph-96.png");
-    }
+    // ฟังก์ชัน async สำหรับตรวจสอบสถานะการยืนยันตัวตน
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/checkAuth', {
+          method: 'GET',
+          credentials: 'include', // สำคัญสำหรับการส่ง cookie ใน request
+        });
+        const data = await res.json();
+  
+        if (data.isLoggedIn && data.role === "User") {
+          setIsLoggedIn(true);
+          // ตั้งค่าอื่น ๆ ตามความจำเป็น
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error("Error checking auth status", error);
+        setIsLoggedIn(false);
+      }
+    };
+  
+    checkAuth();
   }, []);
+  
+
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdownUser = () => setIsDropdownOpenUser(!isDropdownOpenUser);
+
+  const handleLogout = async () => {
+    try {
+      // Call API endpoint to logout
+      await fetch('../api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+      setIsLoggedIn(false);
+      router.push('/');
+    } catch (error) {
+      console.error('Failed to logout:', error);
+    }
+  };
+  
 
   return (
     <header className={styles.headerBar}>
@@ -63,12 +99,23 @@ const HeaderBar: React.FC = () => {
         <NavLink href="/contactus">ติดต่อเรา</NavLink>
       </nav>
       {isLoggedIn ? (
-        <img src={profilePic} alt="Profile" className={styles.profilePic} />
-      ) : (
-        <button onClick={() => router.push('/login')} className={styles.loginButton}>
-          เข้าสู่ระบบ
-        </button>
-      )}
+      <div onClick={toggleDropdownUser} className={styles.profilePicContainer}>
+        <img src='/icon/user.png' alt="Profile" className={styles.profilePic} />   
+        {isDropdownOpenUser && (
+          <div className={styles.dropdownContent}>
+            <Link href="/profile">โปรไฟล์</Link>
+            <Link href="/BookingStatusPage">ติดตามการจอง</Link>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              ออกจากระบบ
+            </button>
+          </div>
+        )}
+      </div>
+    ) : (
+      <button onClick={() => router.push('/login')} className={styles.loginButton}>
+        เข้าสู่ระบบ
+      </button>
+    )}
     </header>
   );
 };

@@ -1,26 +1,23 @@
 // pages/superadmin/index.tsx
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../../components/admin/Header';
 import Menu from '../../../components/menu/superadmin';
 import Submenu from '../../../components/menu/superAdminSubMenu';
-
-interface StayReport {
-  date: string;
-  totalGuests: number;
-  totalBookings: number;
-}
+import { s_ad_auth } from '../../../hooks/adminAuth';
 
 const SuperAdminDashboard = () => {
 
-  return (
-    <div >
-        <Header />
+  s_ad_auth();
+
+    return (
       <div >
-        <Menu/>
-        <Submenu/>
+          <Header />
+        <div >
+          <Menu/>
+          <Submenu/>
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default SuperAdminDashboard;

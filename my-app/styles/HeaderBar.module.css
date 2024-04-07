@@ -53,17 +53,23 @@
 .navLink.active {
   color: orange; /* สีสำหรับลิงก์ที่ active */
 }
+.profilePicContainer {
+  position: relative;
+  cursor: pointer; /* ให้เคอร์เซอร์แสดงเป็นมือเมื่อเมาส์โฮเวอร์ */
+}
 
 .dropdownContent {
-  display: block;
-  position: absolute;
-  background-color: #30A0E0; /* สีพื้นหลังของ dropdown, ตัวอย่างนี้ใช้สีน้ำเงิน */
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 0; /* ปรับ padding เป็น 0 */
-  z-index: 1;
-  border-radius: 10px; /* ขอบมน */
-  margin-top: 5px; /* ระยะห่างจาก NavLink */
+    display: block;
+    position: absolute;
+    background-color: #30A0E0; /* สีพื้นหลัง */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 0; /* ปรับ padding เพื่อความสม่ำเสมอของช่องว่าง */
+    z-index: 1;
+    border-radius: 10px; /* ขอบมน */
+    margin-top: 5px; /* ระยะห่างจาก NavLink */
+    text-align: center; /* จัดข้อความและปุ่มให้อยู่ตรงกลาง */
+    transform: translateX(-30%); /* จัดให้อยู่ตรงกลางของปุ่มหรือ container */
 }
 
 .dropdownContent a {
@@ -82,3 +88,25 @@
 .dropdownContent a:hover {
   background-color: #0056b3; /* สีพื้นหลังเมื่อ hover */
 }
+
+.profilePicContainer {
+  position: relative;
+  cursor: pointer; /* ให้เคอร์เซอร์แสดงเป็นมือเมื่อเมาส์โฮเวอร์ */
+}
+
+.logoutButton {
+  background-color: #30A0E0; /* สีพื้นหลัง */
+  color: white; /* สีข้อความ */
+  padding: 10px 20px; /* ขนาด padding */
+  margin: 5px 0; /* ระยะห่างจากองค์ประกอบอื่นๆ */
+  border: none; /* ไม่มีขอบ */
+  border-radius: 5px; /* ขอบมน */
+  font-weight: bold; /* ข้อความหนา */
+  cursor: pointer; /* เมื่อเมาส์อยู่เหนือปุ่ม */
+  transition: background-color 0.3s; /* เพิ่มเอฟเฟกต์เมื่อ hover */
+}
+
+.logoutButton:hover {
+  background-color: #d70000; /* สีพื้นหลังเมื่อ hover */
+}
+

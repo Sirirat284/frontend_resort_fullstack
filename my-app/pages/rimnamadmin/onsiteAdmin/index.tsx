@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Header from '../../../components/admin/Header';
 import Menu from '../../../components/menu/onsiteAdminMenu';
 import styles from '../../../styles/superadmin/BookingStats.module.css';
+import { OS_ad_auth } from '../../../hooks/adminAuth';
 
 interface Booking {
   id: number;
@@ -16,6 +17,7 @@ interface Booking {
 }
 
 const CheckInPage = () => {
+  OS_ad_auth();
   const [bookings, setBookings] = useState<Booking[]>([
     // สมมติข้อมูลการจอง
     { id: 1, bookingCode: 'B001', roomType: 'Single', checkInDate: '2024-03-30', checkOutDate: '2024-04-02', guestName: 'John Doe', phone: '0123456789', email: 'johndoe@example.com' },

@@ -1,6 +1,7 @@
 // pages/superadmin/BookingStats.tsx
 import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/superadmin/BookingStats.module.css';
+import { s_ad_auth } from '../../../hooks/adminAuth';
 
 interface BookingData {
     roomType: string;
@@ -9,6 +10,7 @@ interface BookingData {
     }
 
 const BookingStats = () => {
+  s_ad_auth();
 
 const [bookingData, setBookingData] = useState<BookingData[]>([]);
 const [startDate, setStartDate] = useState('');

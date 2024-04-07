@@ -1,8 +1,11 @@
 // pages/superadmin/AddPromotion.tsx
 import React, { useState } from 'react';
 import styles from '../../../styles/superadmin/AddPromotion.module.css'; // แก้ไขเส้นทางไฟล์ CSS ให้ถูกต้อง
+import { s_ad_auth } from '../../../hooks/adminAuth';
+
 
 const AddPromotion = () => {
+  s_ad_auth();
   const [promotion, setPromotion] = useState({
     title: '',
     details: '',

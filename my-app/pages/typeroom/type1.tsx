@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Link from 'next/link';
 import styles from '../../styles/RoomType.module.css'; 
 import Header from '../../components/HeaderBar';
@@ -6,8 +6,19 @@ import Footer from '../../components/Footer';
 
 const RoomType = () => {
     const [checkInDate, setCheckInDate] = useState(new Date());
-    const [checkOutDate, setCheckOutDate] = useState(new Date());
+    const defaultCheckOutDate = new Date();
+    defaultCheckOutDate.setDate(defaultCheckOutDate.getDate() + 1);
+    const [checkOutDate, setCheckOutDate] = useState(defaultCheckOutDate);
     const [availableRooms, setAvailableRooms] = useState(0);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+      const userID = sessionStorage.getItem('userID');
+      setIsLoggedIn(!!userID);
+    }, []);
+
+    useEffect(()=>{checkAvailability();},[])
+    
 
     const formatDate = (date: Date | string) => {
         let d = new Date(date),
@@ -25,16 +36,36 @@ const RoomType = () => {
 
       const today = formatDate(new Date());
 
-    const checkAvailability = async () => {
+      const checkAvailability = async () => {
         // Format date to 'yyyy-mm-dd'
-        const formattedCheckInDate = checkInDate.toISOString().split('T')[0];
-        const formattedCheckOutDate = checkOutDate.toISOString().split('T')[0];
-    
+        const formattedCheckInDate = formatDate(checkInDate);
+        const formattedCheckOutDate = formatDate(checkOutDate);
+      
         // Send request to your backend
-        const response = await fetch(`/api/check-availability?roomtype=roomtype1&checkInDate=${formattedCheckInDate}&checkOutDate=${formattedCheckOutDate}`);
-        const data = await response.json();
-        setAvailableRooms(data.availableRooms);
-    };
+        try {
+            // สร้าง URL ที่มี query parameters
+            const url = new URL(`${process.env.BACKEND_PATH}/checkAvailableRoom`, window.location.origin);
+            url.searchParams.append('roomTypeID', "1");
+            url.searchParams.append('checkInDate', formattedCheckInDate);
+            url.searchParams.append('checkOutDate', formattedCheckOutDate);
+
+            // ส่งข้อมูลไปยัง API บนเซิร์ฟเวอร์ โดยใช้ query parameters
+            const response = await fetch(url, {
+            method: 'GET', // ใช้ method GET
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // ไม่ต้องใช้ body เนื่องจากข้อมูลถูกส่งผ่าน query parameters
+            });
+
+            if (!response.ok) throw new Error('Failed to toggle room status');
+          
+            const data = await response.json();
+            setAvailableRooms(data.availableRooms);
+        } catch (error) {
+          console.error("Error checking room availability:", error);
+        }
+      };
 
   return (
     <div className={styles.pageContainer}>
@@ -85,8 +116,18 @@ const RoomType = () => {
                     </div>
 
                     <p>ห้องพักที่ว่าง: {availableRooms} ห้อง</p>
-
-                    <button className={styles.bookingButton}>จองบ้านพัก</button>
+                    <Link href="/bookingroom" passHref>
+                        <button className={styles.bookingButton}>จองบ้านพัก</button>
+                    </Link>
+                    {/* {isLoggedIn ? (
+                        <Link href="/bookingroom" passHref>
+                        <button className={styles.bookingButton}>จองบ้านพัก</button>
+                        </Link>
+                    ) : (
+                        <Link href="/login" passHref>
+                        <button className={styles.bookingButton}>จองบ้านพัก</button>
+                        </Link>
+                    )} */}
                 </div>
                 <div className={styles.imageContainer}>
                     <img src="DALL·E 2023-12-25 15.45.00 - A minimalistic and photorealistic image of a guest room designed for 1-2 persons within a resort, following the serene cove color tone theme. The room.png" alt="ห้องพัก" />

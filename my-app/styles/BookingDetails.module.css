@@ -1,44 +1,109 @@
-.detailsContainer {
-    width: 400px; /* กำหนดความกว้างสูงสุดของ container */
-    margin: 20px auto; /* เพื่อให้ container อยู่ตรงกลางของหน้า */
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.buttonContainer {
     display: flex;
-    flex-direction: column; /* เพิ่มเพื่อจัดการเนื้อหาในแนวตั้ง */
-    align-items: center; /* จัดกลางของเนื้อหาในแนวตั้ง */
+    justify-content: center; /* จัดให้ปุ่มอยู่ตรงกลางแนวนอน */
 }
-
-.detailsHeader {
-    text-align: center;
+.generate_pdf_button {
+  padding: 10px 20px;
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* ตั้งค่า margin ตามที่คุณต้องการ */
+}
+.a4 {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: 10mm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-}
-
-.detailItem {
-    display: flex; /* ใช้ flexbox เพื่อจัดการรายละเอียด */
-    justify-content: space-between; /* ให้ข้อความด้านซ้ายและขวามีระยะห่าง */
-    align-items: center; /* เพิ่มเพื่อจัดกลางของข้อความในแนวตั้ง */
-    width: 100%; /* ให้ความกว้างเต็ม container */
-    margin-bottom: 10px;
-}
-
-.detailItem span {
+  }
+  
+  .logo {
+    width: 100px;
+  }
+  
+  .resort-info div {
+    text-align: right;
+    font-size: 12px;
+  }
+  
+  .booking-title {
+    font-size: 20px;
     font-weight: bold;
-}
-
-.pageContainer {
+    margin-bottom: 20px;
+  }
+  
+  .booking-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 12px;
+  }
+  
+  .leftDetails,
+  .rightDetails {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* ให้คอนเทนเนอร์มีความสูงขั้นต่ำเท่ากับหน้าจอ */
+  }
+  
+  .table-container {
+    margin: 20px 0;
+    font-size: 12px;
+  }
+  
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.contentContainer {
-    flex: 1; /* ให้เนื้อหาใน contentContainer ขยายเต็มพื้นที่ */
-    display: flex;
-    flex-direction: column; /* จัดเนื้อหาเป็นแนวตั้ง */
+.table-header, .table-data {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
 }
-
-.footerContainer {
-    margin-top: auto; /* ดัน footer ไปอยู่ล่างสุด */
-}
+  
+  .section-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0 10px 0;
+  }
+  
+  .conditions-list, .notes-list {
+    list-style-type: none; /* Remove default bullets */
+    padding-left: 0;
+  }
+  
+  .conditions-list li, .notes-list li {
+    margin-bottom: 5px;
+    font-size: 12px;
+  }
+  
+  .thanks {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .booking-date {
+    margin-bottom: 20px; /* หรือปรับตามความต้องการ */
+    font-size: 14px;
+  }
+  .conditions ul, .notes ul {
+    list-style-type: disc; /* แสดงสัญลักษณ์วงกลม */
+    padding-left: 20px; /* เพิ่มระยะห่างจากขอบซ้าย เพื่อให้สัญลักษณ์วงกลมแสดงอย่างชัดเจน */
+  }
+  
+  /* หรือหากต้องการกำหนดสไตล์โดยตรงให้กับแท็ก <li> */
+  .conditions li, .notes li {
+    list-style-type: disc; /* แสดงสัญลักษณ์วงกลม */
+    margin-left: 20px; /* เพิ่มระยะห่างจากขอบซ้าย เพื่อให้สัญลักษณ์วงกลมแสดงอย่างชัดเจน */
+  }

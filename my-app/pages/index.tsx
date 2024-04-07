@@ -7,6 +7,14 @@ import Link from 'next/link';
 
 const Home = () => {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userID = sessionStorage.getItem('userID');
+    setIsLoggedIn(!!userID);
+  }, []);
+
+
   return (
     <div>
       <Header/>
@@ -87,8 +95,17 @@ const Home = () => {
           </p>
           <div className={styles.actionButton}>
           <Link href="/bookingroom" passHref>
-            <button>จองบ้านพัก</button>
-          </Link>
+              <button>จองบ้านพัก</button>
+            </Link>
+          {/* {isLoggedIn ? (
+            <Link href="/bookingroom" passHref>
+              <button>จองบ้านพัก</button>
+            </Link>
+          ) : (
+            <Link href="/login" passHref>
+              <button>จองบ้านพัก</button>
+            </Link>
+          )} */}
           </div>
         </div>
         <div className={styles.imageContainer}>

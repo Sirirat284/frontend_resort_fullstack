@@ -1,53 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../../components/admin/Header';
 import Menu from '../../../components/menu/onlineAdminMenu';
 import styles from '../../../styles/superadmin/BookingStats.module.css';
+import { OL_ad_auth } from '../../../hooks/adminAuth';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 interface Booking {
-  id: number;
-  type: string;
+  headID: number;
+  roomTypeID: string;
+  roomTypeName: string;
   checkInDate: string;
   checkOutDate: string;
   fullName: string;
-  phone: string;
-  email: string;
+  tel: string;
+  Email: string;
   remaining : number;
-  paymentSlip: string;
+  pathpaymentSlip: string;
+  results:number;
 }
 
 const BookingPage = () => {
-  const [bookings, setBookings] = useState<Booking[]>([
-    {
-      id: 1,
-      type: "Single",
-      checkInDate: "2023-04-01",
-      checkOutDate: "2023-04-03",
-      fullName: "John Doe",
-      phone: "123-456-7890",
-      email: "john@example.com",
-      remaining: 3,
-      paymentSlip: "https://ik.imagekit.io/seproject/IMG_2150.JPG?updatedAt=1711177060555"
-    },
-    {
-      id: 1,
-      type: "Single",
-      checkInDate: "2023-04-01",
-      checkOutDate: "2023-04-03",
-      fullName: "John Doe",
-      phone: "123-456-7890",
-      email: "john@example.com",
-      remaining: 3,
-      paymentSlip: "https://ik.imagekit.io/seproject/IMG_2150.JPG?updatedAt=1711177060555"
-    },
-  ]);
+  OL_ad_auth();
+  const [bookings, setBookings] = useState<Booking[]>([]);
 
-  // ฟังก์ชันสำหรับอัปเดตสถานะการจอง
-  const handleApproval = (id: number, isApproved: boolean) => {
-    // อัปเดตสถานะการจองในนี้
-    console.log(`Booking ${id} is ${isApproved ? 'approved' : 'not approved'}`);
-    // เพิ่มโค้ดสำหรับอัปเดตสถานะการจองใน backend ที่นี่
+  const fetchBookings = async () => {
+    try {
+      const response = await axios.get<Booking[]>(`${process.env.BACKEND_PATH}/monitornewreserve`);
+      setBookings(response.data);
+    } catch (error) {
+      console.error('Error fetching bookings:', error);
+    }
   };
+  
+  useEffect(() => {
+    fetchBookings();
+  }, []);
 
+  const handleApproval = async (headID: number, isApproved: boolean) => {
+    
+    try {
+      // สร้าง URL จากตัวแปรสภาพแวดล้อม
+      const url = `${process.env.BACKEND_PATH}/updateResevesStatus`;
+  
+      // ส่งคำขอ POST โดยใช้ fetch
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // กำหนดประเภทของเนื้อหาที่ส่งไป
+        },
+        body: JSON.stringify({
+          headID, // ส่ง headID เป็น ID ของการจอง
+          status: isApproved ? 'จองสำเร็จ' : 'จองไม่สำเร็จ', // ส่งสถานะการอนุมัติ
+        }),
+        credentials: 'include', // สำหรับส่ง cookies ถ้าจำเป็น
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Update success:', data);
+        // แสดง SweetAlert
+        Swal.fire({
+          title: 'สำเร็จ!',
+          text: `Booking ${headID} has been ${isApproved ? 'approved' : 'not approved'}.`,
+          icon: 'success',
+          timer: 1000, // ตั้งเวลาปิดอัตโนมัติหลังจาก 1 วินาที
+          showConfirmButton: false,
+        }).then(() => {
+          fetchBookings(); // เรียกฟังก์ชัน fetchBookings หลังจาก alert ปิด
+        });
+      } else {
+        console.error('Update failed with status:', response.status);
+        Swal.fire('ผิดพลาด!', 'Failed to update the booking status.', 'error');
+      }
+    } catch (error) {
+      console.error('Error updating booking status:', error);
+      Swal.fire('ผิดพลาด!', 'Error occurred while updating the booking status.', 'error');
+    }
+  };
   return (
     <>
     <Header />
@@ -64,27 +94,25 @@ const BookingPage = () => {
             <th className={styles.tableHeader}>เบอร์โทร</th>
             <th className={styles.tableHeader}>Email</th>
             <th className={styles.tableHeader}>รูปสลิปเงิน</th>
-            <th className={styles.tableHeader}>จำนวนห้องคงเหลือ</th>
             <th className={styles.tableHeader}>การอนุมัติ</th>
           </tr>
         </thead>
         <tbody>
           {bookings.map((booking,index) => (
-            <tr key={booking.id} className={styles.tableRow}>
+            <tr key={booking. headID} className={styles.tableRow}>
               <td className={styles.tableData}>{index + 1}</td>
-              <td className={styles.tableData}>{booking.type}</td>
+              <td className={styles.tableData}>{booking.roomTypeName}</td>
               <td className={styles.tableData}>{booking.checkInDate}</td>
               <td className={styles.tableData}>{booking.checkOutDate}</td>
               <td className={styles.tableData}>{booking.fullName}</td>
-              <td className={styles.tableData}>{booking.phone}</td>
-              <td className={styles.tableData}>{booking.email}</td>
+              <td className={styles.tableData}>{booking.tel}</td>
+              <td className={styles.tableData}>{booking.Email}</td>
               <td className={styles.tableData}>
-                <img src={booking.paymentSlip} alt="Payment Slip" className={styles.tableCellslip} />
+                <img src={booking.pathpaymentSlip} alt="Payment Slip" className={styles.tableCellslip} />
               </td>
-              <td className={styles.tableData}>{booking.remaining}</td>
               <td className={styles.tableData}>
-                <button className={styles.approveButton} onClick={() => handleApproval(booking.id, true)}>อนุมัติ</button>
-                <button className={styles.declineButton} onClick={() => handleApproval(booking.id, false)}>ไม่อนุมัติ</button>
+                <button className={styles.approveButton} onClick={() => handleApproval(booking. headID, true)}>อนุมัติ</button>
+                <button className={styles.declineButton} onClick={() => handleApproval(booking. headID, false)}>ไม่อนุมัติ</button>
               </td>
             </tr>
           ))}

@@ -1,21 +1,74 @@
 // pages/booking.tsx
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/Booking.module.css'; // Make sure to create this CSS module
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { user_auth } from '../hooks/userAuth';
+import { sanitizeInput } from '../units/security';
+
+const MySwal = withReactContent(Swal);
+
+interface BookingDetails {
+  roomType: string;
+  checkInDate: string;
+  checkOutDate: string;
+  quantity:string,
+  fullName: string;
+  phoneNumber: string;
+  email: string;
+}
 
 const Booking = () => {
-    const [bookingDetails, setBookingDetails] = useState(() => {
-        if (typeof window !== 'undefined') {
-            // โค้ดนี้จะทำงานเฉพาะในเบราว์เซอร์
-            const savedBooking = sessionStorage.getItem('bookingDetails');
-            return savedBooking ? JSON.parse(savedBooking) : { roomType: '', checkInDate: '', checkOutDate: '', fullName: '', phoneNumber: '', email: '' };
-        }
-        // สำหรับสภาพแวดล้อมที่ไม่ใช่เบราว์เซอร์, ใช้ค่าเริ่มต้น
-        return { roomType: '', checkInDate: '', checkOutDate: '', fullName: '', phoneNumber: '', email: '' };
-    });
+    user_auth();
+    const router = useRouter();
+    const [bookingDetails, setBookingDetails] = useState<BookingDetails>({
+      roomType: '', 
+      checkInDate: '', 
+      checkOutDate: '', 
+      quantity:'',
+      fullName: '', 
+      phoneNumber: '', 
+      email: ''
+  });
+
+  const [roomAvailability, setRoomAvailability] = useState({
+    'สำหรับ 1-2 ท่าน': 3, // สมมติว่ามีห้องประเภทนี้ 5 ห้อง
+    'สำหรับ 3-4 ท่าน': 2, // สมมติว่ามีห้องประเภทนี้ 3 ห้อง
+    'สำหรับ 1 ครอบครัว': 2, // สมมติว่ามีห้องประเภทนี้ 2 ห้อง
+  });
 
 
-  const router = useRouter();
+
+  const renderQuantityOptions = (type: string) => {
+    const options = [];
+    const maxQuantity = roomAvailability[type as keyof typeof roomAvailability] || 0;
+    for (let i = 1; i <= maxQuantity; i++) {
+        options.push(<option key={i} value={i.toString()}>{i}</option>);
+    }
+    return options;
+};
+
+  const getBookingDetails = (): BookingDetails | null => {
+    const data = localStorage.getItem('bookingDetails');
+    if (data) {
+      const parsedData = JSON.parse(data);
+      // Check if the data is expired
+      if (Date.now() > parsedData.expiry) {
+        localStorage.removeItem('bookingDetails'); // Remove data if expired
+        return null;
+      }
+      return parsedData; // Return data if not expired
+    }
+    return null; // Return null if no data
+  };
+
+  useEffect(() => {
+    const storedDetails = getBookingDetails(); // สมมติว่านี่คือฟังก์ชันที่ใช้โหลดข้อมูลการจองจาก localStorage
+    if (storedDetails) {
+        setBookingDetails(storedDetails);
+    }
+}, []);
 
   const formatDate = (date: Date | string) => {
     let d = new Date(date),
@@ -33,80 +86,54 @@ const Booking = () => {
 
   const today = formatDate(new Date());
 
-  interface BookingDetails {
-    roomType: string;
-    checkInDate: string;
-    checkOutDate: string;
-    fullName: string;
-    phoneNumber: string;
-    email: string;
-  }
+  const saveBookingDetails = (details: BookingDetails) => {
+    const data = {
+      ...details,
+      expiry: Date.now() + 86400000, // 24 hours in milliseconds
+    };
+    localStorage.setItem('bookingDetails', JSON.stringify(data));
+  };
+  
+  // Function to get booking details from localStorage
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setBookingDetails((prevDetails:BookingDetails) => ({
-      ...prevDetails,
-      [name]: value
+    setBookingDetails(prevDetails => ({
+        ...prevDetails,
+        [name]: value
     }));
-  };
-  const handleSecurityAlert = () => {
-    alert("คำเตือน: การพยายาม hack หรือเข้าถึงระบบโดยไม่ได้รับอนุญาตนั้นผิดกฎหมายและจะถูกดำเนินการตามกฎหมายที่เกี่ยวข้อง. กรุณาใช้เว็บไซต์นี้อย่างมีจริยธรรม.");
-  }
-  const sanitizeInput = (input: string): string => {
-        // ตรวจสอบว่า input มีเนื้อหาที่อาจเป็น script หรือไม่
-        if (/<script>/i.test(input)) {
-            // แจ้งเตือนผู้ใช้
-            handleSecurityAlert();
-            throw new Error('Invalid input: script tags are not allowed.');
-        }
-        // ทำการ escape ค่าพิเศษที่อาจทำให้เกิดการโจมตี XSS
-        return input.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
+};
+
+
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  try {
     const sanitizedDetails = {
-        roomType: sanitizeInput(bookingDetails.roomType),
-        checkInDate: sanitizeInput(bookingDetails.checkInDate),
-        checkOutDate: sanitizeInput(bookingDetails.checkOutDate),
-        fullName: sanitizeInput(bookingDetails.fullName),
-        phoneNumber: sanitizeInput(bookingDetails.phoneNumber),
-        email: sanitizeInput(bookingDetails.email)
+      roomType: sanitizeInput(bookingDetails.roomType),
+      checkInDate: sanitizeInput(bookingDetails.checkInDate),
+      checkOutDate: sanitizeInput(bookingDetails.checkOutDate),
+      quantity:bookingDetails.quantity,
+      fullName: sanitizeInput(bookingDetails.fullName),
+      phoneNumber: sanitizeInput(bookingDetails.phoneNumber),
+      email: sanitizeInput(bookingDetails.email),
     };
 
-    
-    const saveBookingDetails = (details:BookingDetails) => {
-        const data = {
-          ...details,
-          expiry: Date.now() + 86400000 // อายุหมดอายุหลังจาก 24 ชั่วโมง (86400000 มิลลิวินาที)
-        };
-        localStorage.setItem('bookingDetails', JSON.stringify(data));
-      };
-      saveBookingDetails(sanitizedDetails)
+    // Save sanitized booking details to localStorage
+    saveBookingDetails(sanitizedDetails);
 
-    const getBookingDetails = () => {
-    const data = localStorage.getItem('bookingDetails');
-    if (data) {
-        const bookingDetails = JSON.parse(data);
-        // ตรวจสอบว่าข้อมูลหมดอายุหรือไม่
-        if (Date.now() > bookingDetails.expiry) {
-        localStorage.removeItem('bookingDetails'); // ลบข้อมูลหากหมดอายุ
-        return null;
-        }
-        return bookingDetails;
-    }
-    return null;
-    };
-      
-
+    // Redirect user to the confirmation page with sanitized details
     router.push({
       pathname: 'confirmbook',
       query: { ...sanitizedDetails },
-    })
-    } catch (error) {
-        console.error('Error:', error);
-        router.push('/'); // Redirect ในกรณีมีข้อผิดพลาด
-      }
-  };
+    });
+  } catch (error) {
+    console.error('Error:', error);
+    router.push('/'); // Redirect to home on error
+  }
+};
+
 
   return (
     <>
@@ -116,13 +143,19 @@ const Booking = () => {
         </div>
         <h1>จองบ้านพัก</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="roomType">ประเภทบ้าน:<span className={styles.required}>*</span></label>
-          <select id="roomType" name="roomType" value={bookingDetails.roomType} onChange={handleChange} required>
-            <option value="">เลือกประเภท</option>
-            <option value="roomtype1">1-2ท่าน</option>
-            <option value="roomtype2">3-4ท่าน</option>
-            <option value="roomtype3">1 ครอบครัว</option>
-          </select>
+        <label htmlFor="roomType">ประเภทบ้าน:<span className={styles.required}>*</span></label>
+        <select id="roomType" name="roomType" value={bookingDetails.roomType} onChange={handleChange} required>
+          <option value="">เลือกประเภท</option>
+          <option value="สำหรับ 1-2 ท่าน">1-2ท่าน</option>
+          <option value="สำหรับ 3-4 ท่าน">3-4ท่าน</option>
+          <option value="สำหรับ 1 ครอบครัว">1 ครอบครัว</option>
+        </select>
+
+        <label htmlFor="quantity">จำนวนห้อง:<span className={styles.required}>*</span></label>
+        <select id="quantity" name="quantity" value={bookingDetails.quantity} onChange={handleChange} required>
+          <option value="">เลือกจำนวน</option>
+          {bookingDetails.roomType && renderQuantityOptions(bookingDetails.roomType)}
+        </select>
 
           <label htmlFor="checkInDate">วันที่เข้าที่พัก(Check in):<span className={styles.required}>*</span></label>
           <input type="date" 

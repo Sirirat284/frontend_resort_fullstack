@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/superadmin/BookingStats.module.css';
+import { s_ad_auth } from '../../../hooks/adminAuth';
 
 interface DailyRevenue {
   date: string;
@@ -9,6 +10,7 @@ interface DailyRevenue {
 }
 
 const RevenueStats = () => {
+    s_ad_auth();
     const [dailyRevenues, setDailyRevenues] = useState<DailyRevenue[]>([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');

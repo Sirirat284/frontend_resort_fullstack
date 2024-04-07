@@ -4,6 +4,7 @@ import Header from '../components/HeaderBar'; // อย่าลืมปรั�
 import Footer from '../components/Footer';
 import Sidebar from '../components/Sidebar';
 import styles from '../styles/BookingStatus.module.css'; // สมมติว่ามีการสร้างไฟล์ CSS นี้
+import { user_auth } from '../hooks/userAuth';
 
 interface BookingInfo {
   id: number;
@@ -20,6 +21,9 @@ const sampleBookings: BookingInfo[] = [
 ];
 
 const BookingStatusPage = () => {
+  
+  user_auth();
+
   const [bookings, setBookings] = useState<BookingInfo[]>(sampleBookings);
   const router = useRouter();
 

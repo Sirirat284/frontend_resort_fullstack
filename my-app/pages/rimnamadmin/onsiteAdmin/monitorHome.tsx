@@ -1,57 +1,68 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../../../components/admin/Header';
 import Menu from '../../../components/menu/onsiteAdminMenu';
 import styles from '../../../styles/superadmin/BookingStats.module.css';
 
 interface Room {
-  id: number;
-  roomNumber: string;
-  roomType: string;
+  roomID: number;
+  roomNum: string;
+  roomTypeName: string;
   status: 'ว่าง' | 'ไม่ว่าง' | 'ปรับปรุง';
 }
 
 const MonitorRooms = () => {
-  const [rooms, setRooms] = useState<Room[]>([
-    { id: 1, roomNumber: '101', roomType: 'Single', status: 'ว่าง' },
-    { id: 2, roomNumber: '102', roomType: 'Double', status: 'ไม่ว่าง' },
-    { id: 3, roomNumber: '103', roomType: 'Suite', status: 'ปรับปรุง' },
-  ]);
+  const [rooms, setRooms] = useState<Room[]>([]);
 
-  const handleUpdateStatus = async (roomId: number) => {
-    // กำหนดชนิดข้อมูลให้กับ updatedRooms แบบชัดเจนเพื่อป้องกันข้อผิดพลาด
-    const updatedRooms: Room[] = rooms.map(room =>
-      room.id === roomId ? { ...room, status: 'ปรับปรุง' } : room
-    );
-    setRooms(updatedRooms);
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await fetch(`${process.env.BACKEND_PATH}/monitorRoom`); // ตัวอย่าง URL ของ API ที่ใช้ดึงข้อมูลห้อง
+        if (!response.ok) throw new Error('Failed to fetch rooms');
+        const data = await response.json();
+        setRooms(data); // อัปเดต state ด้วยข้อมูลที่ได้จาก API
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+      }
+    };
+
+    fetchRooms();
+  }, []);
   
-    // จำลองการส่งข้อมูลไปยังแบ็กเอนด์
+
+  const handleToggleStatus = async (roomId: number) => {
+    // หาห้องที่ต้องการแก้ไข
+    const roomToToggle = rooms.find(room => room.roomID === roomId);
+  
+    if (!roomToToggle) return; // ถ้าไม่พบห้อง, ยกเลิกการดำเนินการ
+  
+    // กำหนดสถานะใหม่ตามสถานะปัจจุบัน
+    const newStatus = roomToToggle.status === 'ปรับปรุง' ? 'ว่าง' : 'ปรับปรุง';
+  
     try {
-      const response = await fetch(`/api/rooms/update/${roomId}`, {
-        method: 'POST',
+      // สร้าง URL ที่มี query parameters
+      const url = new URL(`${process.env.BACKEND_PATH}/updateStatusRoom`, window.location.origin);
+      url.searchParams.append('roomID', roomId.toString());
+      url.searchParams.append('status', newStatus);
+    
+      // ส่งข้อมูลไปยัง API บนเซิร์ฟเวอร์ โดยใช้ query parameters
+      const response = await fetch(url, {
+        method: 'GET', // ใช้ method GET
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status: 'ปรับปรุง' }),
+        // ไม่ต้องใช้ body เนื่องจากข้อมูลถูกส่งผ่าน query parameters
       });
-  
-      if (!response.ok) throw new Error('Failed to update room status');
-      console.log('Room status updated successfully');
+    
+      if (!response.ok) throw new Error('Failed to toggle room status');
+    
+      // อัพเดท state หลังจากสำเร็จ
+      setRooms(prevRooms => prevRooms.map(room => room.roomID === roomId ? { ...room, status: newStatus } : room));
+    
+      console.log('Room status toggled successfully');
     } catch (error) {
-      console.error('Error updating room status:', error);
+      console.error('Error toggling room status:', error);
     }
-  };
-  const handleToggleStatus = (roomId: number) => {
-    setRooms(prevRooms => prevRooms.map(room => {
-      if (room.id === roomId) {
-        // สลับสถานะระหว่าง "ปรับปรุง" และ "ว่าง"
-        return {
-          ...room,
-          status: room.status === 'ปรับปรุง' ? 'ว่าง' : 'ปรับปรุง'
-        };
-      }
-      return room;
-    }));
-  };
+  }
   
 
   return (
@@ -71,10 +82,10 @@ const MonitorRooms = () => {
           </thead>
           <tbody>
             {rooms.map((room, index) => (
-              <tr key={room.id}>
+              <tr key={room.roomID}>
                 <td>{index + 1}</td>
-                <td>{room.roomNumber}</td>
-                <td>{room.roomType}</td>
+                <td>{room.roomNum}</td>
+                <td>{room.roomTypeName}</td>
                 <td>
                   <span className={`${
                     room.status === 'ว่าง' ? styles.statusDotAvailable : 
@@ -85,7 +96,7 @@ const MonitorRooms = () => {
                 <td>
                 <button
                     className={`${styles.updateButton} ${room.status === 'ปรับปรุง' ? styles.activeStatus : ''}`}
-                    onClick={() => handleToggleStatus(room.id)}
+                    onClick={() => handleToggleStatus(room.roomID)}
                 >
                     {room.status === 'ปรับปรุง' ? 'ปรับปรุง' : 'ปรับปรุง'}
                 </button>

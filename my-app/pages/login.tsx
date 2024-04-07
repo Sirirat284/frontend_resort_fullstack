@@ -4,21 +4,23 @@ import axios, { AxiosError } from 'axios';
 import Head from 'next/head';
 import styles from '../styles/login.module.css';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { sanitizeInput } from '../units/security';
+import { FaGoogle } from 'react-icons/fa';
+
+
+const MySwal = withReactContent(Swal);
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [role, setRole] = useState<string>('');
   const [error, setError] = useState<string>('');
   const router = useRouter();
 
-  const [message, setMessage] = useState(''); // สถานะสำหรับข้อความที่จะแสดง
-  const [messageColor, setMessageColor] = useState(''); // สถานะสำหรับสีของข้อความ
-
   const validateEmail = (email: string) => {
-   
     return /\S+@\S+\.\S+/.test(email);
   };
 
@@ -26,8 +28,19 @@ const Login = () => {
     return password.length >= 8;
   };
 
+  async function hashData(data: string) {
+    const encoder = new TextEncoder();
+    const dataBuffer = encoder.encode(data);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex;
+  }
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { data: { ip } } = await axios.get('https://api.ipify.org?format=json');
 
     if (!validateEmail(email)) {
         setError('Invalid email format');
@@ -40,28 +53,45 @@ const Login = () => {
     }
 
     try {
-        const response = await axios.post('http://localhost:3000/login', {
-          email: email,
-          password: password,
+      const hashedPassword = await hashData(password);
+      const response = await axios.post(`${process.env.BACKEND_PATH}/login`, {
+        email: sanitizeInput(email),
+        password: sanitizeInput(hashedPassword),
+        ip: ip,
+      });
+
+      if (response.status === 200 && response.data) {
+        const accessToken = response.data.accessToken;
+        const refreshToken = response.data.refreshToken;
+        // แทนที่การเก็บใน sessionStorage ด้วยการเรียกใช้ /api/saveTokens
+        await axios.post('/api/saveTokens', { accessToken , refreshToken });
+
+        // นำทางผู้ใช้ไปยังหน้าหลัก
+        router.push('/');
+      }  else {
+        Swal.fire({
+          icon: 'error',
+          title: 'เกิดข้อผิดพลาด!',
+          text: 'เข้าสู่ระบบไม่สำเร็จ: โปรดตรวจสอบอีเมลหรือรหัสผ่านของคุณ',
         });
-  
-        if (response.status === 200) {
-          // ถ้า response status เป็น 200, แสดงข้อความ "Hello" ด้วยสีเขียว
-          setMessage('Hello');
-          setMessageColor('green');
-          setError(''); // รีเซ็ตข้อความผิดพลาด
-          // router.push('/'); // นำทางไปยังหน้าหลัก หรือหน้าที่ต้องการ
-        }
-      } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          // ถ้ามีข้อผิดพลาด, แสดงข้อความผิดพลาด
-          setError(error.response.data.message);
-          setMessage(''); // รีเซ็ตข้อความ hello
-        }
+      }} catch (error) {
+        MySwal.fire({
+          title: 'เกิดข้อผิดพลาด!',
+          text: 'โปรดตรวจสอบอีเมลหรือรหัสผ่านของคุณ',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+          customClass: {
+              confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+      });
       }
 };
   const handleTogglePassword = () => {
     setShowPassword((prev) => !prev);
+  };
+  const handleGoogleLogin = () => {
+    window.location.href = `${process.env.BACKEND_PATH}/auth/google`;
   };
     return (
         <>
@@ -75,8 +105,6 @@ const Login = () => {
                         <img src="/BAAn RIM NAM(1).png" alt="Logo" />
                     </div>
                     <form className={styles.formGroup} onSubmit={handleLogin}> {/* ใช้ onSubmit ที่นี่ */}
-                        {error && <div className={styles.error}>{error}</div>}
-                        {message && <div style={{ color: messageColor }}>{message}</div>}
     `                    <div className={styles.formGroup}>
                             <label htmlFor="email">Email</label>
                             <input
@@ -102,7 +130,18 @@ const Login = () => {
                         <div className={styles.formAction}>
                             <button type="submit" className={styles.loginButton}>เข้าสู่ระบบ</button> {/* ปุ่มนี้เป็น type="submit" */}
                         </div>
-                    </form>`
+                    </form>
+                    <div className={styles.dividerContainer}>
+                      <div className={styles.dividerLine}></div>
+                      <div className={styles.dividerText}>or</div>
+                      <div className={styles.dividerLine}></div>
+                    </div>
+                    <div>
+                    {/* เพิ่มปุ่มเข้าสู่ระบบด้วย Google */}
+                    <button onClick={handleGoogleLogin} className={styles.loginButtonGoogle}>
+                      <FaGoogle /> เข้าสู่ระบบด้วย Google
+                    </button>
+                  </div>
                 </div>
             </div>
         </>

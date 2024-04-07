@@ -5,8 +5,12 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ทำให้ลูกของ div นี้จัดกลางในแนวนอน */
     text-align: center;
 }
+
 
 .confirmationContainer h2 {
     color: #307AD1;
@@ -55,3 +59,36 @@
     width: 150px; /* ปรับตามขนาดที่ต้องการ */
     margin: 0 auto;
 }
+.qrCodeContainer, .uploadedImagePreview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%; /* หรือคุณสามารถตั้งค่าเป็นขนาดที่ต้องการ */
+    max-width: 300px; /* ปรับตามขนาดที่คุณต้องการ */
+  }
+  
+  .qrCodeContainer img, .uploadedImagePreview img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  
+  .submitButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background-color: #0056b3;
+  }
+  

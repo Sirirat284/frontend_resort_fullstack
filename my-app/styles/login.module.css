@@ -72,3 +72,42 @@
 .link:hover {
   color: #9b6000; /* สีของข้อความลิงก์ */
 }
+
+.loginButtonGoogle {
+  background-color: #4285F4; /* สีพื้นหลังของ Google */
+  color: white; /* สีข้อความ */
+  padding: 10px 15px; /* ระยะห่าง */
+  border: none; /* ไม่มีขอบ */
+  border-radius: 4px; /* ขอบมน */
+  cursor: pointer; /* เปลี่ยน cursor เมื่อชี้ */
+  display: flex; /* ให้ไอคอนและข้อความอยู่ในแนวเดียวกัน */
+  align-items: center; /* จัดกลางไอคอนและข้อความแนวตั้ง */
+  justify-content: center; /* จัดกลางแนวนอน */
+  gap: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+  font-weight: 500; /* ทำให้ข้อความหนาขึ้นเล็กน้อย */
+  width: 100%; /* ให้ปุ่มกว้างเท่ากับคอนเทนเนอร์ */
+  max-width: 250px; /* กำหนดขนาดสูงสุดของปุ่ม */
+  margin-top: 20px; /* ระยะห่างจากฟอร์มหรือส่วนอื่นๆ */
+}
+
+.loginButtonGoogle:hover {
+  background-color: #357ae8; /* สีเมื่อ hover */
+}
+
+.dividerContainer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background-color: #ddd; /* สีของเส้นแบ่ง */
+}
+
+.dividerText {
+  margin: 0 10px;
+  color: #888; /* สีของข้อความ "or" */
+}
