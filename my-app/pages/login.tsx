@@ -53,21 +53,31 @@ const Login = () => {
     }
 
     try {
-      const hashedPassword = await hashData(password);
+      //const hashedPassword = await hashData(password);
       const response = await axios.post(`${process.env.BACKEND_PATH}/login`, {
         email: sanitizeInput(email),
-        password: sanitizeInput(hashedPassword),
+        password: sanitizeInput(password),
         ip: ip,
       });
+
+
 
       if (response.status === 200 && response.data) {
         const accessToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
+	console.log(response.data);
         // แทนที่การเก็บใน sessionStorage ด้วยการเรียกใช้ /api/saveTokens
-        await axios.post('/api/saveTokens', { accessToken , refreshToken });
-
-        // นำทางผู้ใช้ไปยังหน้าหลัก
-        router.push('/');
+        try {
+      await axios.post('/api/saveTokens', { accessToken, refreshToken });
+      router.push('/');
+    } catch (error) {
+      console.error('Error saving tokens:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error saving tokens',
+        text: 'An error occurred while saving the tokens. Please try again.',
+      });
+    }
       }  else {
         Swal.fire({
           icon: 'error',

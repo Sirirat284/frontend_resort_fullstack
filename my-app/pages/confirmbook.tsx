@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import styles from '../styles/ConfirmBooking.module.css';
-import { loadStripe } from '@stripe/stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
 import { user_auth } from '../hooks/userAuth';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
+//import Cookies from 'js-cookie'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+//const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface BookingDetails {
   roomType: string;
@@ -98,6 +99,16 @@ const ConfirmBooking = () => {
         credentials: 'include',
         body: formData,
       });
+    //const accessToken = Cookies.get('accessToken')
+//console.log('Cookies sent:', accessToken);
+//console.log("confirmbook erro");
+//console.log(response)
+//// Print the cookies sent in the request
+console.log('Cookies sent:', document.cookie);
+//const accessToken = req.cookies.get('accessToken');
+// Get the accessToken cookie value
+  const accessToken = document.cookie.replace(/(?:(?:^|.*;\s*)accessToken\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+console.log('accessToken cookei:', accessToken);
 
       if (response.ok) {
         Swal.fire({

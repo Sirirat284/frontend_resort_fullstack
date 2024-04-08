@@ -44,10 +44,10 @@ const AdminLogin = () => {
 
 
     try {
-      const hashedPassword = await hashData(password);
+     // const hashedPassword = await hashData(password);
       const { data } = await axios.post(`${process.env.BACKEND_PATH}/loginAdmin`, {
         AdminName: sanitizeInput(adminName),
-        Password: sanitizeInput(hashedPassword),
+        Password: sanitizeInput(password),
       });
 
       if (data) {

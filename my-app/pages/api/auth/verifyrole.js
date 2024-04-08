@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 // ฟังก์ชันสำหรับตรวจสอบและ decode token
 function verifyToken(token) {
   // ตรวจสอบและ decode token ที่นี่
+	console.log('dodo token');
+	console.log(token);
+
   return jwt.verify(token, process.env.JWT_SECRET); // ใช้ secret key จาก environment variables
 }
 

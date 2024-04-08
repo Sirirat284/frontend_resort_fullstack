@@ -86,7 +86,7 @@ const Signup = () => {
         //   return;
         // }
     try {
-          const hashedPassword = await hashData(formData.password);
+        //  const hashedPassword = await hashData(formData.password);
           const response = await axios.post(`${process.env.BACKEND_PATH}/register`, {
               fullName: sanitizeInput(formData.fullName),
               phoneNumber: sanitizeInput(formData.phoneNumber),
@@ -97,7 +97,7 @@ const Signup = () => {
               province: sanitizeInput(formData.province),
               occupation: sanitizeInput(formData.occupation),
               email:formData.email,
-              password:hashedPassword
+              password: sanitizeInput(formData.password)
               // password:hashedPassword
           });
 

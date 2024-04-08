@@ -101,19 +101,21 @@ const AddAdmin = () => {
           });
           return;
         }
-        const hashedPassword = await hashData(admin.password);
+        //const hashedPassword = await hashData(admin.password);
 
         const regisAdmin = {
             AdminName: sanitizeInput(admin.adminName),
-            Password: sanitizeInput(hashedPassword),
+            Password: sanitizeInput(admin.password),
             ID_Card: sanitizeInput(admin.idCard),
             Full_Name: sanitizeInput(admin.fullName),
             Tel: sanitizeInput(admin.phone),
             Email: sanitizeInput(admin.email),
             Role: sanitizeInput(admin.position)
         };
-
+	console.log("REGIS ADMIND");
+	console.log(regisAdmin);
         try {
+
             const response = await fetch(`${process.env.BACKEND_PATH}/registerAdmin`, {
                 method: 'POST',
                 headers: {
