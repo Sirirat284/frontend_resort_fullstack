@@ -7,4 +7,9 @@ export default function handler(req, res) {
     
     // ส่งคำตอบกลับไปยัง client ว่าการออกจากระบบสำเร็จ
     res.status(200).json({ success: true });
+/*
+res.clearCookie('accessToken', { path: '/', domain: '.sirirat.top' });
+res.clearCookie('refreshToken', { path: '/', domain: '.sirirat.top' });
+res.status(200).json({ success: true });*/
+
   }
